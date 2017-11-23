@@ -38,7 +38,7 @@
 
 The query parameters can be HTTP or JSON
 
-#### User registration
+**User registration**
 
 ##### HTTP Request
 > POST http://localhost:3000/api/v1/sign_up
@@ -68,11 +68,10 @@ The query parameters can be HTTP or JSON
   }
 }
 ```
-#### Example
-**Request**
+#### Request example
 > curl --data "email=test@example.com&password=qwerty123 http://localhost:3000/api/v1/sign_up
 
-**Response**
+#### Response example
 ```json
 {
   "status": "success",
@@ -83,7 +82,7 @@ The query parameters can be HTTP or JSON
 }
 ```
 
-#### User login
+**User login**
 
 ##### HTTP Request
 > POST http://localhost:3000/api/v1/sign_in
@@ -110,11 +109,10 @@ The query parameters can be HTTP or JSON
   "error_message": "Login or password is incorrect"
 }
 ```
-#### Example
-**Request**
+#### Request example
 > curl --data "email=test@example.com&password=qwerty123" http://localhost:3000/api/v1/sign_in
 
-**Response**
+#### Response example
 ```json
 {
   "status": "success",
