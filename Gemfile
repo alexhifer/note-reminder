@@ -30,6 +30,14 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
+# Active Admin is a framework for creating administration style interfaces https://activeadmin.info
+gem 'activeadmin'
+
+# User Devise is a flexible authentication solution for Rails based on Warden
+gem 'devise'
+# Token authentication support has been removed from Devise
+gem 'simple_token_authentication', '~> 1.0'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

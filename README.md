@@ -6,11 +6,9 @@
 ## How to play:
 
 1. clone repository
-    ```bash
-    git clone https://github.com/alexhifer/note-reminder.git
+    > git clone https://github.com/alexhifer/note-reminder.git
 2. installing gems
-    ```bash
-    bundle install
+    > bundle install
 3. create role for PostgreSQL
     ```bash
     sudo -u postgres psql
@@ -28,5 +26,100 @@
      host: localhost
      port: 5432
 5. Create databases
-   ```bash
-   rake db:create
+   > rake db:create
+5. Loads the seed data
+   > rake db:seed
+6. Start web server
+   > rails s
+7. Open admin zone in browser (login: note_reminder@example.com, password: qwerty123)
+   > http://localhost:3000/admin
+   
+## API Documentation
+
+The query parameters can be HTTP or JSON
+
+#### User registration
+
+##### HTTP Request
+> POST http://localhost:3000/api/v1/sign_up
+
+##### Query Parameters
+| Param | Description |
+| --- | --- |
+| email | User e-mail address |
+| password | User password |
+
+##### Success response
+```json
+{
+  "status": "success",
+  "data": {
+    "id": 1,
+    "email": "test@example.com"
+  }
+}
+```
+##### Error response
+```json
+{
+  "status": "error",
+  "error_messages": {
+    "email": ["has already been taken"]
+  }
+}
+```
+#### Example
+**Request**
+> curl --data "email=test@example.com&password=qwerty123 http://localhost:3000/api/v1/sign_up
+
+**Response**
+```json
+{
+  "status": "success",
+  "data": {
+    "id": 1,
+    "email": "test@example.com"
+  }
+}
+```
+
+#### User login
+
+##### HTTP Request
+> POST http://localhost:3000/api/v1/sign_in
+
+##### Query Parameters
+| Param | Description |
+| --- | --- |
+| email | User e-mail address |
+| password | User password |
+
+##### Success response
+```json
+{
+  "status": "success",
+  "data": {
+    "user_token": "CQFJgyPTLkszmsyr_dBD"
+  }
+}
+```
+##### Error response
+```json
+{
+  "status": "error",
+  "error_message": "Login or password is incorrect"
+}
+```
+#### Example
+**Request**
+> curl --data "email=test@example.com&password=qwerty123" http://localhost:3000/api/v1/sign_in
+
+**Response**
+```json
+{
+  "status": "success",
+  "data": {
+    "user_token": "CQFJgyPTLkszmsyr_dBD"
+  }
+}
+```
