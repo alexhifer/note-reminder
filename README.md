@@ -27,11 +27,13 @@
      port: 5432
 5. Create databases
    > rake db:create
-5. Loads the seed data
+6. Migrate the database
+   > rake db:migrate
+7. Loads the seed data
    > rake db:seed
-6. Start web server
+8. Start web server
    > rails s
-7. Open admin zone in browser (login: note_reminder@example.com, password: qwerty123)
+9. Open admin zone in browser (login: note_reminder@example.com, password: qwerty123)
    > http://localhost:3000/admin
    
 ## API Documentation
