@@ -27,5 +27,8 @@ module NoteReminder
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    # Set default time zone
+    config.time_zone = 'Europe/Kiev'
   end
 end

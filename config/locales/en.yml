@@ -30,4 +30,10 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  activerecord:
+    errors:
+      models:
+        note:
+          attributes:
+            remind_at_utc:
+              should_be_after_current_timestamp: Should be after current timestamp

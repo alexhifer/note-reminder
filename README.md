@@ -44,10 +44,12 @@ The query parameters can be HTTP or JSON
 > POST http://localhost:3000/api/v1/sign_up
 
 ##### Query Parameters
-| Param | Description |
-| --- | --- |
-| email | User e-mail address |
-| password | User password |
+| Param | Type | Required | Description |
+| --- | --- | --- | --- |
+| email | string(5...255) | yes | User e-mail address |
+| password | string(6...128) | yes | User password |
+| device_token | string(1...255) | yes | Mobile device token for send push notifications |
+| device_type | string, (ios, android) | no | Type of device |
 
 ##### Success response
 ```json
@@ -68,10 +70,11 @@ The query parameters can be HTTP or JSON
   }
 }
 ```
-#### Request example
-> curl --data "email=test@example.com&password=qwerty123 http://localhost:3000/api/v1/sign_up
-
-#### Response example
+##### Request example
+```bash
+curl --data "email=test@example.com&password=qwerty123" http://localhost:3000/api/v1/sign_up
+```
+##### Response example
 ```json
 {
   "status": "success",
@@ -88,10 +91,10 @@ The query parameters can be HTTP or JSON
 > POST http://localhost:3000/api/v1/sign_in
 
 ##### Query Parameters
-| Param | Description |
-| --- | --- |
-| email | User e-mail address |
-| password | User password |
+| Param | Type| Required | Description |
+| --- | --- | --- | --- |
+| email | string(5...255) | yes | User e-mail address |
+| password | string(6...128) | yes | User password |
 
 ##### Success response
 ```json
@@ -109,10 +112,12 @@ The query parameters can be HTTP or JSON
   "error_message": "Login or password is incorrect"
 }
 ```
-#### Request example
-> curl --data "email=test@example.com&password=qwerty123" http://localhost:3000/api/v1/sign_in
+##### Request example
+```bash
+curl --data "email=test@example.com&password=qwerty123" http://localhost:3000/api/v1/sign_in
+```
 
-#### Response example
+##### Response example
 ```json
 {
   "status": "success",
@@ -121,3 +126,65 @@ The query parameters can be HTTP or JSON
   }
 }
 ```
+
+**Create note (Authorization required)**
+
+##### HTTP Request
+> POST http://localhost:3000/api/v1/notes
+
+##### Query Parameters
+| Param | Type| Required | Description |
+| --- | --- | --- | --- |
+| body | string(2...255) | yes | Note text |
+| remind_at_utc | string(16), format(YYYY-MM-DD HH:MM) | yes | Time of sending push notification in UTC format. |
+
+##### Success response
+```json
+{
+  "status": "success",
+  "data": {
+    "id": 1,
+    "remind_at": "2017-12-02T00:32:00.000+02:00"
+  }
+}
+```
+##### Error response
+```json
+{
+  "status": "error",
+  "error_messages": {
+    "body": ["can't be blank", "is too short (minimum is 2 characters)"]
+  }
+}
+```
+##### Request example
+```bash
+curl -H "Content-Type: application/json" -H "X-User-Email: test@example.com" -H "X-User-Token: e812xctHtE2ktjjw7_B4" -X POST -d '{ "body":"Test message","remind_at_utc":"2017-12-01 22:32" }' http://localhost:3000/api/v1/notes
+```
+
+##### Response example
+```json
+{
+  "status": "success",
+  "data": {
+    "id": 1,
+    "remind_at": "2017-12-02T00:32:00.000+02:00"
+  }
+}
+```
+
+**Authorization methods**
+
+! To get the *user_token* you need to send user login(api method) and in the answer get it.
+
+1. You can authenticate passing the user_email and user_token params as query params:
+    ```bash
+    curl --data "user_email=test@example.com&user_token=e812xctHtE2ktjjw7_B4" http://localhost:3000/api/v1/notes
+    ```
+2. You can also use request headers:
+    ```bash
+    curl -H "X-User-Email: test@example.com" -H "X-User-Token: e812xctHtE2ktjjw7_B4" http://localhost:3000/api/v1/notes
+    ```
+
+##### Error response
+> 401 Unauthorized
