@@ -51,6 +51,11 @@ The query parameters can be HTTP or JSON
 | device_token | string(1...255) | yes | Mobile device token for send push notifications |
 | device_type | string, (ios, android) | no | Type of device |
 
+##### Request example
+```bash
+curl --data "email=test@example.com&password=qwerty123" http://localhost:3000/api/v1/sign_up
+```
+
 ##### Success response
 ```json
 {
@@ -70,20 +75,6 @@ The query parameters can be HTTP or JSON
   }
 }
 ```
-##### Request example
-```bash
-curl --data "email=test@example.com&password=qwerty123" http://localhost:3000/api/v1/sign_up
-```
-##### Response example
-```json
-{
-  "status": "success",
-  "data": {
-    "id": 1,
-    "email": "test@example.com"
-  }
-}
-```
 
 **User login**
 
@@ -96,6 +87,10 @@ curl --data "email=test@example.com&password=qwerty123" http://localhost:3000/ap
 | email | string(5...255) | yes | User e-mail address |
 | password | string(6...128) | yes | User password |
 
+##### Request example
+```bash
+curl --data "email=test@example.com&password=qwerty123" http://localhost:3000/api/v1/sign_in
+```
 ##### Success response
 ```json
 {
@@ -112,20 +107,6 @@ curl --data "email=test@example.com&password=qwerty123" http://localhost:3000/ap
   "error_message": "Login or password is incorrect"
 }
 ```
-##### Request example
-```bash
-curl --data "email=test@example.com&password=qwerty123" http://localhost:3000/api/v1/sign_in
-```
-
-##### Response example
-```json
-{
-  "status": "success",
-  "data": {
-    "user_token": "CQFJgyPTLkszmsyr_dBD"
-  }
-}
-```
 
 **Create note (Authorization required)**
 
@@ -138,6 +119,10 @@ curl --data "email=test@example.com&password=qwerty123" http://localhost:3000/ap
 | body | string(2...255) | yes | Note text |
 | remind_at_utc | string(16), format(YYYY-MM-DD HH:MM) | yes | Time of sending push notification in UTC format. |
 
+##### Request example
+```bash
+curl -H "Content-Type: application/json" -H "X-User-Email: test@example.com" -H "X-User-Token: e812xctHtE2ktjjw7_B4" -X POST -d '{ "body":"Test message","remind_at_utc":"2017-12-01 22:32" }' http://localhost:3000/api/v1/notes
+```
 ##### Success response
 ```json
 {
@@ -157,21 +142,7 @@ curl --data "email=test@example.com&password=qwerty123" http://localhost:3000/ap
   }
 }
 ```
-##### Request example
-```bash
-curl -H "Content-Type: application/json" -H "X-User-Email: test@example.com" -H "X-User-Token: e812xctHtE2ktjjw7_B4" -X POST -d '{ "body":"Test message","remind_at_utc":"2017-12-01 22:32" }' http://localhost:3000/api/v1/notes
-```
 
-##### Response example
-```json
-{
-  "status": "success",
-  "data": {
-    "id": 1,
-    "remind_at": "2017-12-02T00:32:00.000+02:00"
-  }
-}
-```
 
 **Authorization methods**
 
