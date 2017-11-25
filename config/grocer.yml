@@ -1,0 +1,8 @@
+gateway: gateway.sandbox.push.apple.com
+# Certificate should be placed in /config/certifications folder
+certificate: grocer_dev.pem
+passphrase: ''
+port: 2195
+# The number of times grocer will retry writing to or reading from the Apple Push
+# Notification Service before raising any errors to client code.
+retries: 3

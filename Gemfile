@@ -38,6 +38,14 @@ gem 'devise'
 # Token authentication support has been removed from Devise
 gem 'simple_token_authentication', '~> 1.0'
 
+# Simple, efficient background processing for Ruby.
+gem 'sidekiq'
+# A scheduling add-on for Sidekiq.
+gem 'sidekiq-cron', '~> 0.6.3'
+
+# Interfaces with the Apple Push Notification Service to send push notifications to iOS devices
+gem 'grocer'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

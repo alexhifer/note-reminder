@@ -3,11 +3,26 @@ class Note < ApplicationRecord
 
   belongs_to :user
 
+  scope :not_sent, -> { where(is_sent: false) }
+  scope :need_reminded, -> { where('remind_at <= ?', Time.current) }
+
   before_create :set_remind_at
 
   validates :body, presence: true, length: { minimum: 2, maximum: 255 }
   validates :remind_at_utc, presence: true, format: { with: /\A\d{4}-\d{2}-\d{2} \d{2}:\d{2}\z/ }
   validate  :remind_at_on_after_current_timestamp_validate
+
+  def self.remind!
+    is_sent_ids = []
+    ios_notificator = IosPushNotificator.new
+
+    not_sent.need_reminded.joins(:user).where(users: { device_type: 'ios' }).find_each do |note|
+      ios_notificator.notify(note.user.device_token, note.body)
+      is_sent_ids << note.id
+    end
+
+    Note.where(id: is_sent_ids).update_all(is_sent: true)
+  end
 
   private
 

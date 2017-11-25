@@ -4,6 +4,13 @@ Rails.application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
+  require 'sidekiq/web'
+  require 'sidekiq/cron/web'
+
+  authenticate :admin_user do
+    mount Sidekiq::Web => '/admin/sidekiq_monitor'
+  end
+
   devise_for :users, skip: :all
 
   namespace :api do
@@ -11,8 +18,7 @@ Rails.application.routes.draw do
       devise_scope :user do
         post 'sign_up', to: 'registrations#create'
         post 'sign_in', to: 'sessions#create'
-
-        resource :notes, only: %i(create)
+        post 'notes',   to: 'notes#create'
       end
     end
   end

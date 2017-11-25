@@ -1,7 +1,13 @@
 # note-reminder
 
+**Task:** write api for sign up, sign in and send note with push notifications for IOS devices.
+
+**Launched on:**
+- Ubuntu 16.04
 - Ruby version: 2.4.2
 - Rails version: 5.1.4
+- PostgreSQL: 10.1
+- Redis: 3.0.6
 
 ## How to play:
 
@@ -25,15 +31,18 @@
      password: 123456
      host: localhost
      port: 5432
-5. Create databases
+5. Configure /config/grocer.yml
+6. Create databases
    > rake db:create
-6. Migrate the database
+7. Migrate the database
    > rake db:migrate
-7. Loads the seed data
+8. Loads the seed data
    > rake db:seed
-8. Start web server
+9. Start web server
    > rails s
-9. Open admin zone in browser (login: note_reminder@example.com, password: qwerty123)
+10. Start sidekiq
+   > sidekiq
+11. Open admin zone in browser (login: note_reminder@example.com, password: qwerty123)
    > http://localhost:3000/admin
    
 ## API Documentation
@@ -51,7 +60,7 @@ The query parameters can be HTTP or JSON
 | email | string(5...255) | yes | User e-mail address |
 | password | string(6...128) | yes | User password |
 | device_token | string(1...255) | yes | Mobile device token for send push notifications |
-| device_type | string, (ios, android) | no | Type of device |
+| device_type | string, (ios, android), default(ios) | no | Type of device |
 
 ##### Request example
 ```bash

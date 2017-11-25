@@ -50,8 +50,10 @@ ActiveRecord::Schema.define(version: 20171123165108) do
     t.string "body"
     t.datetime "remind_at"
     t.bigint "user_id"
+    t.boolean "is_sent", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["is_sent"], name: "index_notes_on_is_sent"
     t.index ["user_id"], name: "index_notes_on_user_id"
   end
 
