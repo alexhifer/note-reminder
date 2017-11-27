@@ -83,7 +83,11 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 production:
-  <<: *default
-  database: note_reminder_prod
-  username: note_reminder
-  password: <%= ENV['NOTE-REMINDER_DATABASE_PASSWORD'] %>
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  database: d2hnvbf76ogn4v
+  username: dpzdushsnqgand
+  password: 07d79a8de8f54472f7d1c32757fd7e0965d3522e3a279768962af86c516b7528
+  host: ec2-23-21-204-166.compute-1.amazonaws.com
+  port: 5432
