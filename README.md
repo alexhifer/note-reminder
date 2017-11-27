@@ -2,6 +2,8 @@
 
 **Task:** write api for sign up, sign in and send note with push notifications for IOS devices.
 
+Demo: https://intense-river-43264.herokuapp.com
+
 **Launched on:**
 - Ubuntu 16.04
 - Ruby version: 2.4.2
@@ -9,7 +11,7 @@
 - PostgreSQL: 10.1
 - Redis: 3.0.6
 
-## How to play:
+## How to play in localhost:
 
 1. clone repository
     > git clone https://github.com/alexhifer/note-reminder.git
