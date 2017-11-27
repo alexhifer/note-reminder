@@ -64,7 +64,7 @@ The query parameters can be HTTP or JSON
 
 ##### Request example
 ```bash
-curl --data "email=test@example.com&password=qwerty123" http://localhost:3000/api/v1/sign_up
+curl --data "email=test@example.com&password=qwerty123&&device_token=testtoken123" http://localhost:3000/api/v1/sign_up
 ```
 
 ##### Success response
